@@ -5,6 +5,8 @@ import Home from '../../Pages/Home/Home/Home';
 import Login from '../../Pages/Login/Login/Login';
 import Register from '../../Pages/Login/Register/Register';
 import News from '../../Pages/News/News/News';
+import TermsAndConditions from '../../Pages/Others/TermsAndConditions/TermsAndConditions';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 export const routes = createBrowserRouter([
 
@@ -15,20 +17,20 @@ export const routes = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>,
-                loader: () => fetch('http://localhost:5000/news')
+                loader: () => fetch('https://dragon-news-server-five-nu.vercel.app/news')
             },
             {
                 path: '/catagory/:id',
                 element: <Catagory></Catagory>,
                 loader: ({ params }) => {
-                    return fetch(`http://localhost:5000/category/${params.id}`)
+                    return fetch(`https://dragon-news-server-five-nu.vercel.app/category/${params.id}`)
                 },
             },
             {
                 path: '/news/:id',
-                element: <News></News>,
+                element: <PrivateRoute><News></News></PrivateRoute>,
                 loader: ({ params }) => {
-                    return fetch(`http://localhost:5000/news/${params.id}`)
+                    return fetch(`https://dragon-news-server-five-nu.vercel.app/news/${params.id}`)
                 },
             },
             {
@@ -38,6 +40,10 @@ export const routes = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register></Register>
+            },
+            {
+                path: '/terms',
+                element: <TermsAndConditions></TermsAndConditions>
             }
 
         ]
